@@ -1,0 +1,82 @@
+<div style="display: flex; justify-content: space-between;">
+  <button class="btn btn-primary" (click)="mostrarFormulario = false"> Volver</button>
+  <button class="btn btn-primary" (click)="mostrarFormulario = true"> + Agregar</button>
+</div>
+<div *ngIf="mostrarFormulario;else tabla">
+  <form (ngSubmit)="onSubmit(formularioAgregar.value)" [formGroup]="formularioAgregar">
+    <div class="container mb-3">
+      <div class="row">
+        <div class="col">
+          <label for="InputNombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="InputNombre" formControlName="nombre" />
+        </div>
+        <div class="col">
+          <label for="InputApellido" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="InputNombre" formControlName="apellidos" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="InputEdad" class="form-label">Edad</label>
+          <input type="number" class="form-control" id="InputEdad" formControlName="edad" />
+        </div>
+        <div class="col">
+          <label for="InputDireccion" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="InputDireccion" formControlName="direccion" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="InputCualificaciones" class="form-label">Cualificaciones</label>
+          <input type="text" class="form-control" id="InputDireccion" formControlName="cualificaciones" />
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-3">
+          <button class="" type="submit" class="btn btn-primary ">Guardar </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<ng-template #tabla>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Foto</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Género</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Cualificaciones</th>
+        <th scope="col">Detalle</th>
+
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let estudiante of estudiantes">
+        <th scope="row">{{estudiante.id}}</th>
+        <td> <img src="{{estudiante.avatar}}" alt="imagen Estudiante"> </td>
+        <td>{{estudiante.nombre}}</td>
+        <td>{{estudiante.apellidos}}</td>
+        <td>{{estudiante.edad}}</td>
+        <td>{{estudiante.genero}}</td>
+        <td>{{estudiante.direccion}}</td>
+        <td>{{estudiante.cualificaciones}}</td>
+        <td><button title="Ver detalles" class="btn btn-primary" routerLink="/student-details/{{estudiante.id}}"><span
+              class="material-icons">
+              search
+            </span></button></td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+
+<ngb-toast class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1200;" header="{{mensajeToastHeader}}"
+  *ngIf="mostrarToast" [autohide]="true">
+  {{mensajeToastBody}}
+</ngb-toast>

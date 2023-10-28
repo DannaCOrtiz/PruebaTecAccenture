@@ -1,0 +1,80 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-3">
+      <div class="card" style="width: 'auto'">
+        <div class="card-body">
+          <img class="card-img-top" src="{{ estudiante?.avatar }}" alt="" />
+          <h3>
+            {{ estudiante?.nombre }} {{ estudiante?.apellidos }}
+          </h3>
+          <p>
+            {{ estudiante?.genero }} - {{ estudiante?.edad }} años
+          </p>
+          <p class="card-text">Dirección: {{ estudiante?.direccion }}</p>
+          <p class="card-text">Cualificaciones: {{ estudiante?.cualificaciones }}</p>
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <button title="Editar estudiante" class="btn btn-primary" (click)="actualizarEstudiante = true"><span
+                    class="material-icons">
+                    mode_edit
+                  </span></button>
+              </div>
+              <div class="col-6">
+                <button title="Eliminar estudiante" class="btn btn-danger col" (click)="EliminarEstudiante()"><span
+                    class="material-icons">
+                    delete_forever
+                  </span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <div>
+        <form *ngIf="actualizarEstudiante" [formGroup]="detallesEstudiante"
+          (ngSubmit)="GuardarEstudiante(detallesEstudiante.value)">
+          <div class="container mb-3">
+            <div class="row">
+              <div class="col">
+                <label for="InputNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="InputNombre" formControlName="nombre" />
+              </div>
+              <div class="col">
+                <label for="InputApellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="InputNombre" formControlName="apellidos" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="InputEdad" class="form-label">Edad</label>
+                <input type="number" class="form-control" id="InputEdad" formControlName="edad" />
+              </div>
+              <div class="col">
+                <label for="InputDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="InputDireccion" formControlName="direccion" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="InputCualificaciones" class="form-label">Cualificaciones</label>
+                <input type="text" class="form-control" id="InputDireccion" formControlName="cualificaciones" />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-3">
+                <button class="" type="submit" class="btn btn-primary ">Guardar </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngb-toast class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1200;" header="{{mensajeToastHeader}}"
+  *ngIf="mostrarToast" [autohide]="true">
+  {{mensajeToastBody}}
+</ngb-toast>
