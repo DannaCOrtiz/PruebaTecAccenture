@@ -59,7 +59,11 @@
             <div class="row">
               <div class="col">
                 <label for="InputCualificaciones" class="form-label">Cualificaciones</label>
-                <input type="text" class="form-control" id="InputDireccion" formControlName="cualificaciones" />
+                <!-- <input type="text" class="form-control" id="InputDireccion" formControlName="cualificaciones" /> -->
+                <select class="form-control" (change)='onChange($event)'>
+                  <option selected>Seleccione... </option>
+                  <option *ngFor="let cualificaciones of Cualificaciones" value={{cualificaciones.id}}>{{cualificaciones.valorCualificacion}}</option>
+                </select>
               </div>
             </div>
             <div class="row mt-3">
@@ -78,3 +82,4 @@
   *ngIf="mostrarToast" [autohide]="true">
   {{mensajeToastBody}}
 </ngb-toast>
+

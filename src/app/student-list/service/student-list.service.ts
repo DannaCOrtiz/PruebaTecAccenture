@@ -8,7 +8,7 @@ import { Estudiante } from 'src/app/models/estudiante';
 })
 export class StudentListService {
   constructor(private http: HttpClient) {}
-  private URLGlobal = Global.urlApi;
+  private URLGlobal = Global.urlApiExterna;
   private URLConsultarEstudiantes = 'estudiantes/';
 
   getEstudiantes() {
